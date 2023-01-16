@@ -2,6 +2,9 @@
 /dist
 /node_modules
 
+firebaseServiceAccount.json
+.env
+
 # Logs
 logs
 *.log
