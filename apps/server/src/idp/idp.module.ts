@@ -1,10 +1,17 @@
-import { Module } from '@nestjs/common';
-import { IDPService } from './idp.service';
-
+import { Module, DynamicModule } from '@nestjs/common';
+import { getIdentityProvider } from '.';
 @Module({
   imports: [],
   controllers: [],
-  providers: [IDPService],
-  exports: [IDPService],
+  providers: [],
 })
-export class IDPModule {}
+export class IDPModule {
+  static forRoot(provider: string): DynamicModule {
+    const services = getIdentityProvider(provider);
+    return {
+      module: IDPModule,
+      providers: services,
+      exports: services,
+    };
+  }
+}
